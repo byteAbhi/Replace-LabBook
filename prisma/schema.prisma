@@ -56,3 +56,16 @@ model Hint {
   
   Step      Step     @relation(fields: [stepId], references: [id])
 }
+
+
+model Submission {
+  id          String   @id @default(uuid())
+  userId      String
+  stepId      String
+  code        String
+  languageId  Int
+  output      String?
+  error       String?
+  status      String
+  createdAt   DateTime @default(now())
+}
