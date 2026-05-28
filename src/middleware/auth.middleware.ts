@@ -1,12 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { JwtPayload } from "../types/auth";
 
 
-interface JwtPayload {
-  id: string;
-  email: string;
-  role: string;
-}
+
 
 export interface AuthRequest extends Request {
   users?: JwtPayload  ;
@@ -24,6 +21,8 @@ export const authMiddleware =(req :AuthRequest,res:Response,next:NextFunction)=>
     try{
         const decoded   =  jwt.verify(token as string, process.env.JWT_SECRET as string);
         req.users = decoded  as JwtPayload; 
+        console.log("Decoded user:", decoded);
+        console.log("Request users:", req.users);
         next();
     }
     catch(error){

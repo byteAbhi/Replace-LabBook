@@ -25,3 +25,34 @@ enum Role {
   STUDENT
   TEACHER
 }
+
+model Problem {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  createdBy   String
+  steps       Step[]
+  createdAt   DateTime @default(now())
+   
+}
+
+model Step {
+  id          String   @id @default(uuid())
+  problemId   String
+  title       String
+  description String
+  order       Int
+  hints       Hint[]
+   
+  
+  Problem     Problem  @relation(fields: [problemId], references: [id])
+}
+
+model Hint {
+  id        String   @id @default(uuid())
+  stepId    String
+  content   String
+  createdAt DateTime @default(now())
+  
+  Step      Step     @relation(fields: [stepId], references: [id])
+}

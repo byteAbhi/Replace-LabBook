@@ -5,6 +5,9 @@ import morgan from "morgan";
  
 import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
+ 
+import problemRoutes from "./routes/problem.routes";
+import stepsRoutes from "./routes/steps.routes";
 
 const app = express();
 
@@ -14,6 +17,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/api/auth" , authRoutes);
+app.use("/api/problems", problemRoutes);
+app.use("/api/steps",  stepsRoutes);
 
 
 // Health check 
